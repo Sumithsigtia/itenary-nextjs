@@ -28,7 +28,7 @@ function Navbar({ className }: { className?: string }) {
             <HoveredLink href="/trip">
               Your Preference
             </HoveredLink>
-            <HoveredLink href="/trip">Generated Plan</HoveredLink>
+            <HoveredLink href="/output">Generated Plan</HoveredLink>
                </div>
             </MenuItem>
             <Link href={"/contact"}>
