@@ -1,0 +1,124 @@
+{
+  "destinations": [
+    {
+      "id": 1,
+      "title": "Paris",
+      "slug": "paris",
+      "description": "Experience the romance and elegance of Paris, from the Eiffel Tower to the Louvre.",
+      "price": 1299.99,
+      "guide": "Marie Dubois",
+      "isFeatured": true,
+      "image": "/destinations/paris.jpeg"
+    },
+    {
+      "id": 2,
+      "title": "Kashmir",
+      "slug": "kashmir",
+      "description": "Explore the stunning landscapes and serene beauty of Kashmir.",
+      "price": 999.99,
+      "guide": "Aamir Khan",
+      "isFeatured": true,
+      "image": "/destinations/kashmir.jpeg"
+    },
+    {
+      "id": 3,
+      "title": "Kerala",
+      "slug": "kerala",
+      "description": "Experience the tranquil backwaters and lush greenery of Kerala.",
+      "price": 1099.99,
+      "guide": "Nikhil Menon",
+      "isFeatured": true,
+      "image": "/destinations/kerala.jpeg"
+    },
+    {
+      "id": 4,
+      "title": "Switzerland",
+      "slug": "switzerland",
+      "description": "Enjoy the breathtaking views and pristine landscapes of Switzerland.",
+      "price": 1599.99,
+      "guide": "Hans Meier",
+      "isFeatured": true,
+      "image": "/destinations/switzerland.jpeg"
+    },
+    {
+      "id": 5,
+      "title": "Bali",
+      "slug": "bali",
+      "description": "Relax on the beautiful beaches and explore the vibrant culture of Bali.",
+      "price": 1199.99,
+      "guide": "Wayan Sukarta",
+      "isFeatured": true,
+      "image": "/destinations/bali.jpeg"
+    },
+    {
+      "id": 6,
+      "title": "Brazil",
+      "slug": "brazil",
+      "description": "Immerse yourself in the vibrant culture and beautiful landscapes of Brazil.",
+      "price": 1499.99,
+      "guide": "João Silva",
+      "isFeatured": true,
+      "image": "/destinations/brazil.jpeg"
+    },
+    {
+      "id": 7,
+      "title": "Lakshadweep",
+      "slug": "lakshadweep",
+      "description": "Discover the stunning coral reefs and clear waters of Lakshadweep.",
+      "price": 1299.99,
+      "guide": "Ayesha Ali",
+      "isFeatured": true,
+      "image": "/destinations/lakshadweep.jpeg"
+    },
+    {
+      "id": 8,
+      "title": "Thailand",
+      "slug": "thailand",
+      "description": "Explore the vibrant street life and beautiful temples of Thailand.",
+      "price": 1199.99,
+      "guide": "Somchai Srisai",
+      "isFeatured": true,
+      "image": "/destinations/thailand.jpeg"
+    },
+    {
+      "id": 9,
+      "title": "Mexico",
+      "slug": "mexico",
+      "description": "Experience the rich history and vibrant culture of Mexico.",
+      "price": 1399.99,
+      "guide": "Maria Rodriguez",
+      "isFeatured": true,
+      "image": "/destinations/mexico.jpeg"
+    },
+    {
+      "id": 10,
+      "title": "Italy",
+      "slug": "italy",
+      "description": "Discover the ancient history and stunning architecture of Italy.",
+      "price": 1599.99,
+      "guide": "Giovanni Russo",
+      "isFeatured": true,
+      "image": "/destinations/italy.jpeg"
+    },
+    {
+      "id": 11,
+      "title": "London",
+      "slug": "london",
+      "description": "Experience the rich history and modern culture of London.",
+      "price": 1399.99,
+      "guide": "Sophie Williams",
+      "isFeatured": true,
+      "image": "/destinations/london.jpeg"
+    },
+    {
+      "id": 12,
+      "title": "Bangalore",
+      "slug": "bangalore",
+      "description": "Explore the vibrant city life and beautiful parks of Bangalore.",
+      "price": 999.99,
+      "guide": "Ravi Kumar",
+      "isFeatured": true,
+      "image": "/destinations/bangalore.jpeg"
+    }
+  ]
+}
