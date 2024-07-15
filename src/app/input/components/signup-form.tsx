@@ -1,4 +1,3 @@
-// signup-form.tsx
 import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -46,11 +45,10 @@ function SignupFormDemo({ nextStep, setPreferences }: SignupFormProps) {
         className="flex items-center justify-center w-full h-full"
       >
         <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-
           <form className="my-8" onSubmit={handleSubmit}>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="language">Preferred Language</Label>
-              <Input id="language" placeholder="English" type="text" value={formData.language} onChange={handleChange} />
+              <Label htmlFor="language">Hotel Rating</Label>
+              <Input id="language" placeholder="5 star" type="text" value={formData.language} onChange={handleChange} />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
               <Label htmlFor="travelStyle">Travel Style</Label>
@@ -68,12 +66,11 @@ function SignupFormDemo({ nextStep, setPreferences }: SignupFormProps) {
               <Label htmlFor="dietaryRestrictions">Dietary Restrictions</Label>
               <Input id="dietaryRestrictions" placeholder="Vegetarian, Vegan, etc." type="text" value={formData.dietaryRestrictions} onChange={handleChange} />
             </LabelInputContainer>
-
             <button
               className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
               type="submit"
             >
-              Sign up &rarr;
+              Generate Plan &rarr;
               <BottomGradient />
             </button>
           </form>

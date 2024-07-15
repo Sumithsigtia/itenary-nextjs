@@ -1,6 +1,5 @@
-// page.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import PlaceholdersAndVanishInputDemo from "@/app/input/components/source";
@@ -26,77 +25,93 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const nextStep = () => setStep((prev) => prev + 1);
+  useEffect(() => {
+    console.log("Current Preferences:", preferences);
+  }, [preferences]);
 
-  const handleSubmit = async () => {
-    setLoading(true);
+  const nextStep = () => setStep(prevStep => prevStep + 1);
 
-    const tripDetails = {
-      source,
-      destination,
-      date: startDate,
-      duration,
-    };
-
-    const userPreferences = {
-      language_preference: preferences.language,
-      interests: preferences.interests,
-      past_travel: " ", // Replace with actual past travel value if available
-      dietary_restrictions: preferences.dietaryRestrictions,
-      activity_level: "Moderate", // Replace with actual activity level if available
-      specific_interests: " ", // Replace with actual specific interests if available
-      accommodation_preference: "Hotel", // Replace with actual accommodation preference if available
-      travel_style: preferences.travelStyle,
-      must_visit_landmarks: " ", // Replace with actual must-visit landmarks if available
-    };
-
-    console.log("Preferences:", userPreferences);
-
-    try {
-      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
-      const message = `
-        Create a detailed travel itinerary focused on attractions, restaurants, and activities for a trip from 
-        ${tripDetails.source} to ${tripDetails.destination}, starting on ${tripDetails.date}, lasting for 
-        ${tripDetails.duration} days, within a moderate budget in INR. This should include daily timings, 
-        preferences for ${userPreferences.accommodation_preference} accommodations, a ${userPreferences.travel_style} travel style, 
-        and interests in ${userPreferences.interests}. Past travel includes ${userPreferences.past_travel}, dietary restrictions include 
-        ${userPreferences.dietary_restrictions}, and the activity level is ${userPreferences.activity_level}. Also, provide a travel checklist relevant to the destination and duration.
-      `;
-
-      console.log("Sending request to Gemini API:", message);
-
-      const apiResponse = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText?key=${apiKey}`,
-        {
-          prompt: {
-            text: message,
-          },
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log("Response from Gemini API:", apiResponse.data);
-
-      if (apiResponse.data && apiResponse.data.candidates && apiResponse.data.candidates.length > 0) {
-        let formattedResponse = apiResponse.data.candidates[0].output;
-        formattedResponse = formattedResponse.replace(/[#*]/g, ""); // Remove # and *
-        formattedResponse = formattedResponse.split("\n").map((line: string) => line.trim()).join("<br/>");
-        router.push(`/output?page=${encodeURIComponent(formattedResponse)}`);
-      } else {
-        console.log("No content found in the response.");
-        router.push(`/output?page=${encodeURIComponent("No content found in the response.")}`);
-      }
-    } catch (error) {
-      console.error("Error generating travel plan:", error);
-      router.push(`/output?page=${encodeURIComponent("Failed to generate travel plan. Please try again.")}`);
-    } finally {
-      setLoading(false);
-    }
+  const handleSubmit = () => {
+    setStep(6); // Move to step 6 for sending the prompt
   };
+
+  useEffect(() => {
+    const sendPrompt = async () => {
+      if (step !== 6) return;
+
+      setLoading(true);
+
+      const tripDetails = {
+        source,
+        destination,
+        date: startDate,
+        duration,
+      };
+
+      const userPreferences = {
+        language_preference: preferences.language,
+        interests: preferences.interests,
+        past_travel: " ", // Replace with actual past travel value if available
+        dietary_restrictions: preferences.dietaryRestrictions,
+        activity_level: "Moderate", // Replace with actual activity level if available
+        specific_interests: " ", // Replace with actual specific interests if available
+        accommodation_preference: "Hotel", // Replace with actual accommodation preference if available
+        travel_style: preferences.travelStyle,
+        must_visit_landmarks: " ", // Replace with actual must-visit landmarks if available
+        no_of_travellers: preferences.numberOfTravellers
+      };
+
+      console.log("Preferences:", userPreferences);
+
+      try {
+        const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+        const message = `
+          Create a detailed travel itinerary focused on attractions, restaurants, and activities for a trip from 
+          ${tripDetails.source} to ${tripDetails.destination} in hotel rating of 
+          ${userPreferences.language_preference} for number of travellers as ${userPreferences.no_of_travellers}, starting on ${tripDetails.date}, lasting for 
+          ${tripDetails.duration} , within a moderate budget in INR. This should include daily timings, 
+          preferences for ${userPreferences.accommodation_preference} accommodations, a ${userPreferences.travel_style} travel style, 
+          and interests in ${userPreferences.interests}. Past travel includes ${userPreferences.past_travel}, dietary restrictions include 
+          ${userPreferences.dietary_restrictions}, and the activity level is ${userPreferences.activity_level}. Also, provide a travel checklist relevant to the destination and duration.
+        `;
+
+        console.log("Sending request to Gemini API:", message);
+
+        const apiResponse = await axios.post(
+          `https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText?key=${apiKey}`,
+          {
+            prompt: {
+              text: message,
+            },
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        console.log("Response from Gemini API:", apiResponse.data);
+
+        if (apiResponse.data && apiResponse.data.candidates && apiResponse.data.candidates.length > 0) {
+          let formattedResponse = apiResponse.data.candidates[0].output;
+          formattedResponse = formattedResponse.replace(/[#*]/g, ""); // Remove # and *
+          formattedResponse = formattedResponse.split("\n").map((line: string) => line.trim()).join("<br/>");
+          router.push(`/output?page=${encodeURIComponent(formattedResponse)}`);
+        } else {
+          console.log("No content found in the response.");
+          router.push(`/output?page=${encodeURIComponent("No content found in the response.")}`);
+        }
+      } catch (error) {
+        console.error("Error generating travel plan:", error);
+        router.push(`/output?page=${encodeURIComponent("Failed to generate travel plan. Please try again.")}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    sendPrompt();
+  }, [step]);
 
   return (
     <main className="min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02]">
@@ -115,7 +130,7 @@ export default function Home() {
       {step === 5 && (
         <SignupFormDemo nextStep={handleSubmit} setPreferences={setPreferences} />
       )}
-      {loading && <p>Loading...</p>}
+      {step === 6 && loading && <p>Loading...</p>}
     </main>
   );
 }
