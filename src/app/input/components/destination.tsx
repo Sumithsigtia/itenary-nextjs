@@ -15,17 +15,19 @@ function PlaceholdersAndVanishDestinationDemo({ nextStep, setDestination }: Step
   const [isVanishing, setIsVanishing] = useState(false);
 
   const placeholders = ["Paris", "London", "New York", "Tokyo"];
-
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value); // Update state variable with user input
     console.log(e.target.value);
+    
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("submitted", userInput); // Log the user input when form is submitted
     setIsVanishing(true);
-    setDestination(userInput); // Set the destination input in the parent state
+    setDestination(userInput);
+    sessionStorage.setItem('dest',userInput);// Set the destination input in the parent state
     setTimeout(() => {
       nextStep(); // Move to the next step after a delay
     }, 550); // Delay to allow animation to complete

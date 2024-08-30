@@ -19,10 +19,17 @@ const teamMembers = [
   },
   {
     id: 3,
-    name: 'Mohit S',
+    name: 'Swathi S',
     designation: 'Student at AIML Dept',
     image:
-      '/destinations/mohit.jpg',
+      '/destinations/swathi.jpeg',
+  },
+  {
+    id: 4,
+    name: 'Pankaj Kumar',
+    designation: 'Student at CSE Dept',
+    image:
+      '/destinations/Pankaj.jpeg',
   },
 ];
 

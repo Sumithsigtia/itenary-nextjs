@@ -1,26 +1,39 @@
 import Link from "next/link";
-import { Spotlight } from "./ui/Spotlight";
 import { Button } from "./ui/moving-border";
 
 function HeroSection() {
   return (
     <div
-      className="h-auto md:h-[40rem] w-full rounded-md flex flex-col items-center justify-center relative overflow-hidden mx-auto py-10 md:py-0"
+      className="relative h-auto md:h-[40rem] w-full rounded-md flex flex-col items-center justify-center overflow-hidden mx-auto py-10 md:py-0"
     >
-      <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20"
-        fill="white"
-      />
-      <div className="p-4 relative z-10 w-full text-center">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        style={{ filter: 'brightness(100%) contrast(100%)' }} // Apply filter here
+      >
+        <source src="/Travel destinations.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"></div>
+
+      <div className="relative z-20 w-full text-center">
         <h1
-          className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400"
+          className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold text-white bg-opacity-60 px-4 py-2 rounded-lg inline-block"
         >
           Discover Your Next Adventure
         </h1>
         <p
-          className="mt-4 font-normal text-base md:text-lg text-neutral-300 max-w-lg mx-auto"
+          className="text-lg md:text-xl text-center text-white font-semibold mt-6 max-w-3xl mx-auto leading-relaxed"
         >
-          Plan your perfect trip with our AI Travel Planner. Whether you&apos;re looking for adventure, relaxation, or cultural experiences, we&apos;ll help you create an unforgettable journey.
+          Plan your perfect trip with our <strong>AI Travel Planner</strong>. 
+          Whether you&apos;re looking for adventure, relaxation, 
+          or cultural experiences, we&apos;ll help you create an 
+          unforgettable journey.
         </p>
         <div className="mt-4">
           <Link href="/input">

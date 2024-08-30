@@ -26,6 +26,7 @@ function DurationInputDemo({ nextStep, setDuration }: StepProps) {
     console.log("submitted", userInput); // Log the user input when form is submitted
     setIsVanishing(true);
     setDuration(userInput); // Set the duration input in the parent state
+    sessionStorage.setItem('dur',userInput);
     setTimeout(() => {
       nextStep(); // Move to the next step after a delay
     }, 550); // Delay to allow animation to complete

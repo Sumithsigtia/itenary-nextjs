@@ -8,7 +8,7 @@ interface SignupFormProps {
   nextStep: () => void;
   setPreferences: (preferences: {
     language: string;
-    travelStyle: string;
+    Budget: string;
     numberOfTravellers: string;
     interests: string;
     dietaryRestrictions: string;
@@ -18,7 +18,7 @@ interface SignupFormProps {
 function SignupFormDemo({ nextStep, setPreferences }: SignupFormProps) {
   const [formData, setFormData] = useState({
     language: "",
-    travelStyle: "",
+    Budget: "",
     numberOfTravellers: "",
     interests: "",
     dietaryRestrictions: "",
@@ -51,8 +51,8 @@ function SignupFormDemo({ nextStep, setPreferences }: SignupFormProps) {
               <Input id="language" placeholder="5 star" type="text" value={formData.language} onChange={handleChange} />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="travelStyle">Travel Style</Label>
-              <Input id="travelStyle" placeholder="Adventure, Leisure, etc." type="text" value={formData.travelStyle} onChange={handleChange} />
+              <Label htmlFor="Budget">Budget</Label>
+              <Input id="Budget" placeholder="Amount with currency type Ex: 100K $" type="text" value={formData.Budget} onChange={handleChange} />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
               <Label htmlFor="numberOfTravellers">Number of Travellers</Label>
