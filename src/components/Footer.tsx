@@ -1,3 +1,5 @@
+import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
+
 function Footer() {
   return (
     <footer className="bg-black text-gray-400 py-12">
@@ -43,22 +45,36 @@ function Footer() {
           <h2 className="text-white text-lg font-semibold mb-4">Follow Us</h2>
           <div className="flex space-x-4">
             <a
-              href="#"
+              href="https://www.facebook.com"
               className="hover:text-white transition-colors duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Facebook
+              <FaFacebookF size={24} />
             </a>
             <a
-              href="#"
+              href="https://www.x.com"
               className="hover:text-white transition-colors duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Twitter
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+              >
+                <path d="M17.05 3.3L12 8.35 6.95 3.3 3.3 6.95 8.35 12l-5.05 5.05L6.95 20.7 12 15.65l5.05 5.05 3.65-3.65L15.65 12l5.05-5.05L17.05 3.3z"></path>
+              </svg>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com"
               className="hover:text-white transition-colors duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Instagram
+              <FaInstagram size={24} />
             </a>
           </div>
         </div>
