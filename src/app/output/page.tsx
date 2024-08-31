@@ -5,12 +5,13 @@ import { useSearchParams } from "next/navigation";
 import { SparklesCore } from "@/components/ui/sparkles";
 import DestinationImage from "@/app/output/DestinationImage";
 import TravelPlanTable from "@/app/output/TravelPlanTable";
+import PricingDetails from '@/app/output/demo/page'; // Import PricingDetails component
 
-const capitalizeWords = (text:any) => {
+const capitalizeWords = (text: any) => {
   if (!text) return '';
   return text
     .split(' ')
-    .map((word:any) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .map((word: any) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ');
 };
 
@@ -20,6 +21,7 @@ const ResultsPageContent = () => {
   const [travelData, setTravelData] = useState<any | null>(null); // Adjust type as needed
   const [additionalDetails, setAdditionalDetails] = useState<string | null>(null);
   const [additionalDetailsAfter, setAdditionalDetailsAfter] = useState<string | null>(null);
+  const [showPricingDetails, setShowPricingDetails] = useState<boolean>(false); // State to control visibility of PricingDetails
 
   const searchParams = useSearchParams();
   const rawResponse = searchParams.get("page") || "";
@@ -151,6 +153,19 @@ const ResultsPageContent = () => {
             <p dangerouslySetInnerHTML={{ __html: additionalDetails }} />
           </div>
         )}
+        <button
+          onClick={() => setShowPricingDetails(!showPricingDetails)}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          {showPricingDetails ? 'Hide Pricing Details' : 'Show Pricing Details'}
+        </button>
+        {showPricingDetails && <PricingDetails />}
+        <button
+          onClick={() => window.print()} // Add this line to trigger the print functionality
+          className="mt-4 ml-4 px-4 py-2 bg-green-500 text-white rounded"
+        >
+          Print Your Itenary
+        </button>
       </div>
     </div>
   );

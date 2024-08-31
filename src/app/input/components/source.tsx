@@ -25,7 +25,8 @@ function PlaceholdersAndVanishInputDemo({ nextStep, setSource }: StepProps) {
     e.preventDefault();
     console.log("submitted", userInput); // Log the user input when form is submitted
     setIsVanishing(true);
-    setSource(userInput); // Set the source input in the parent state
+    setSource(userInput);
+    sessionStorage.setItem('sou',userInput); // Set the source input in the parent state
     setTimeout(() => {
       nextStep(); // Move to the next step after a delay
     }, 550); // Delay to allow animation to complete

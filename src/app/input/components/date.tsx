@@ -18,7 +18,8 @@ function DateInput({ nextStep, setStartDate }: StepProps) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStartDate(startDate); // Set the start date input in the parent state
+    setStartDate(startDate);
+    sessionStorage.setItem('stdate',startDate); // Set the start date input in the parent state
     nextStep(); // Move to the next step
   };
 

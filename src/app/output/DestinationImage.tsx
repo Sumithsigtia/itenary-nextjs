@@ -15,7 +15,7 @@ const DestinationImage = () => {
           `https://api.unsplash.com/search/photos`,
           {
             params: {
-              query: `${dest} attraction hd quality`, // More specific query
+              query: `${dest} famous and most visited tourist place attraction`, // More specific query
               client_id: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY, // Ensure this is correctly set in your environment
               per_page: 1,
               orientation: "landscape", // Ensuring the image has the correct orientation
