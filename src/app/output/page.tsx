@@ -147,6 +147,12 @@ const ResultsPageContent = () => {
           </div>
         </div>
         <TravelPlanTable travelData={travelData} />
+        <button
+          onClick={() => window.print()} // Add this line to trigger the print functionality
+          className="mt-4 ml-4 px-4 py-2 bg-green-500 text-white rounded"
+        >
+          Print Your Itenary
+        </button>
         {additionalDetails && (
           <div className="text-white mt-4">
             <h2 className="text-xl font-bold mb-2">Additional Details</h2>
@@ -160,12 +166,6 @@ const ResultsPageContent = () => {
           {showPricingDetails ? 'Hide Pricing Details' : 'Show Pricing Details'}
         </button>
         {showPricingDetails && <PricingDetails />}
-        <button
-          onClick={() => window.print()} // Add this line to trigger the print functionality
-          className="mt-4 ml-4 px-4 py-2 bg-green-500 text-white rounded"
-        >
-          Print Your Itenary
-        </button>
       </div>
     </div>
   );
