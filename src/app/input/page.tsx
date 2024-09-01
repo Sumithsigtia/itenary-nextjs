@@ -98,7 +98,7 @@ export default function Home() {
 
         // Second API Call: Additional Details
         const messageForDetails = `Generate additional details for the trip  from 
-        ${tripDetails.source} to ${tripDetails.destination} for ${tripDetails.duration} within a budget of ${userPreferences.budget} for ${userPreferences.no_of_travellers} number of travellers including suggested packing list, safety tips, and local customs. Consider the preferences:  Hotel Rating: ${userPreferences.hotel_rating}, interests: ${userPreferences.interests}, dietary restrictions: ${userPreferences.dietary_restrictions}, and activity level: ${userPreferences.activity_level} in not more than 100 words. I already have the Itenary so i just want additional details in a paragraph of 100 words`;
+        ${tripDetails.source} to ${tripDetails.destination} for ${tripDetails.duration} within a budget of ${userPreferences.budget} for ${userPreferences.no_of_travellers} number of travellers including suggested packing list, safety tips, and local customs. Consider the preferences:  Hotel Rating: ${userPreferences.hotel_rating}, interests: ${userPreferences.interests}, dietary restrictions: ${userPreferences.dietary_restrictions}, and activity level: ${userPreferences.activity_level} in not more than 100 words. I already have the Itenary so i just want additional details in a paragraph of 100 words dont give Itenary strictly`;
 
         console.log('Sending request for additional details:', messageForDetails);
 
