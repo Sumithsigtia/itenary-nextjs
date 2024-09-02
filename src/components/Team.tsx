@@ -31,6 +31,12 @@ const teamMembers = [
     image:
       '/destinations/Pankaj.jpeg',
   },
+  {
+    id:5,
+    name: 'Mohit S',
+    designation : 'Student at AIML Dept',
+    image: '/destinations/mohit.jpeg',
+  },
 ];
 
 function Team() {
