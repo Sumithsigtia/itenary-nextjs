@@ -35,7 +35,7 @@ const teamMembers = [
     id:5,
     name: 'Mohit S',
     designation : 'Student at AIML Dept',
-    image: '/destinations/mohit.jpeg',
+    image: '/destinations/mohit.jpg',
   },
 ];
 
