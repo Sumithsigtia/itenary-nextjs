@@ -15,7 +15,7 @@ interface HotelData {
 
 const HotelDetails: React.FC<HotelDetailsProps> = ({ location, checkinDate, checkoutDate }) => {
   const [hotelData, setHotelData] = useState<HotelData[]>([]);
-  const baseUrl = 'https://attempts-mortality-underwear-charming.trycloudflare.com';
+  const baseUrl = 'https://trademarks-reload-afford-debug.trycloudflare.com';
 
   const fetchHotelDetails = async () => {
     try {
