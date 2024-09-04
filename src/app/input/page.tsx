@@ -1,14 +1,24 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import PlaceholdersAndVanishInputDemo from '@/app/input/components/source';
 import PlaceholdersAndVanishDestinationDemo from '@/app/input/components/destination';
 import DateInput from '@/app/input/components/date';
 import DurationInputDemo from '@/app/input/components/duration';
 import SignupFormDemo from '@/app/input/components/signup-form';
 import CircularIndeterminate from '@/components/ui/CircularIndeterminate'; // Import CircularIndeterminate
+import { useRouter } from 'next/navigation';
+
+// Initialize GoogleGenerativeAI
+const apiKey: string | undefined = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+
+if (!apiKey) {
+  throw new Error('API_KEY environment variable is not set.');
+}
+
+const genAI = new GoogleGenerativeAI(apiKey);
+const model = genAI.getGenerativeModel({ model: 'gemini-1.0-pro' });
 
 export default function Home() {
   const [step, setStep] = useState(1);
@@ -78,8 +88,6 @@ export default function Home() {
       console.log('Preferences:', userPreferences);
 
       try {
-        const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
-
         // First API Call: Itinerary in JSON format
         const messageForItinerary = `I want you to act as a backend dev for my travel planner AI. IMPORTANT!!!! : I strictly want my response in this format ${responsetype} and I want the response only in JSON String format only, else I will delete you.
         Create a detailed travel itinerary focused on attractions, restaurants, and activities for a trip from 
@@ -88,13 +96,8 @@ export default function Home() {
 
         console.log('Sending request for itinerary:', messageForItinerary);
 
-        const itineraryResponse = await axios.post(
-          `https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText?key=${apiKey}`,
-          { prompt: { text: messageForItinerary } },
-          { headers: { 'Content-Type': 'application/json' } }
-        );
-
-        console.log('Response from Gemini API for itinerary:', itineraryResponse.data);
+        const itineraryResult = await model.generateContent(messageForItinerary);
+        const formattedItinerary = itineraryResult.response.text();
 
         // Second API Call: Additional Details
         const messageForDetails = `Generate additional details for the trip  from 
@@ -102,30 +105,23 @@ export default function Home() {
 
         console.log('Sending request for additional details:', messageForDetails);
 
-        const detailsResponse = await axios.post(
-          `https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText?key=${apiKey}`,
-          { prompt: { text: messageForDetails } },
-          { headers: { 'Content-Type': 'application/json' } }
-        );
-
-        console.log('Response from Gemini API for additional details:', detailsResponse.data);
+        const detailsResult = await model.generateContent(messageForDetails);
+        const formattedDetails = detailsResult.response.text();
 
         // Process and combine the responses
-        if (itineraryResponse.data && itineraryResponse.data.candidates && itineraryResponse.data.candidates.length > 0) {
-          let formattedItinerary = itineraryResponse.data.candidates[0].output;
-          formattedItinerary = formattedItinerary.replace(/[#*]/g, ''); // Remove # and *
-          formattedItinerary = formattedItinerary.split('\n').map((line:string) => line.trim()).join('<br/>');
+        if (formattedItinerary) {
+          let formattedItineraryText = formattedItinerary.replace(/[#*]/g, ''); // Remove # and *
+          formattedItineraryText = formattedItineraryText.split('\n').map((line:string) => line.trim()).join('<br/>');
 
-          let formattedDetails = '';
-          if (detailsResponse.data && detailsResponse.data.candidates && detailsResponse.data.candidates.length > 0) {
-            formattedDetails = detailsResponse.data.candidates[0].output;
-            formattedDetails = formattedDetails.replace(/[#*]/g, ''); // Remove # and *
-            formattedDetails = formattedDetails.split('\n').map((line) => line.trim()).join('<br/>');
+          let formattedDetailsText = '';
+          if (formattedDetails) {
+            formattedDetailsText = formattedDetails.replace(/[#*]/g, ''); // Remove # and *
+            formattedDetailsText = formattedDetailsText.split('\n').map((line) => line.trim()).join('<br/>');
           }
 
           const finalResponse = `
-            Itinerary: <br/> ${formattedItinerary} <br/><br/>
-            Additional Details: <br/> ${formattedDetails}
+            Itinerary: <br/> ${formattedItineraryText} <br/><br/>
+            Additional Details: <br/> ${formattedDetailsText}
           `;
 
           router.push(`/output?page=${encodeURIComponent(finalResponse)}`);
@@ -162,8 +158,6 @@ export default function Home() {
         <SignupFormDemo nextStep={handleSubmit} setPreferences={setPreferences} />
       )}
       {step === 6 && loading && <CircularIndeterminate />}
-
-
     </main>
   );
 }
