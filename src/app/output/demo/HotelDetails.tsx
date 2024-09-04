@@ -15,7 +15,7 @@ interface HotelData {
 
 const HotelDetails: React.FC<HotelDetailsProps> = ({ location, checkinDate, checkoutDate }) => {
   const [hotelData, setHotelData] = useState<HotelData[]>([]);
-  const baseUrl = 'https://respondents-donor-wage-mechanics.trycloudflare.com';
+  const baseUrl = 'https://moms-kg-trackbacks-registered.trycloudflare.com';
 
   const fetchHotelDetails = async () => {
     try {
